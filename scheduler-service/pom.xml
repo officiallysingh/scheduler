@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ksoot</groupId>
+		<artifactId>scheduler</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	 <groupId>com.ksoot.scheduler</groupId>
+	<artifactId>scheduler-service</artifactId>
+	<!-- <version>0.0.1-SNAPSHOT</version> -->
+	<packaging>jar</packaging>
+	<name>scheduler-service</name>
+	<description>Spring Boot Quartz Scheduler as a service</description>
+
+	<properties>
+		<start-class>com.ksoot.scheduler.SchedulerApplication</start-class>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.ksoot.scheduler</groupId>
+			<artifactId>scheduler-commons</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ksoot.scheduler</groupId>
+			<artifactId>scheduler-jobs</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-web</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-quartz</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hamcrest</groupId>
+					<artifactId>hamcrest-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--				<configuration>-->
+<!--					<mainClass>${start-class}</mainClass>-->
+<!--					<executable>${spring-boot-jar.executable}</executable>-->
+<!--					<jvmArguments>${argLine}</jvmArguments>-->
+<!--					&lt;!&ndash; <jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments> &ndash;&gt;-->
+<!--				</configuration>-->
+<!--				<executions>-->
+<!--					&lt;!&ndash; <execution> &ndash;&gt;-->
+<!--					&lt;!&ndash; <goals> &ndash;&gt;-->
+<!--					&lt;!&ndash; <goal>repackage</goal> &ndash;&gt;-->
+<!--					&lt;!&ndash; </goals> &ndash;&gt;-->
+<!--					&lt;!&ndash; </execution> &ndash;&gt;-->
+<!--					<execution>-->
+<!--						<id>pre-integration-test</id>-->
+<!--						<goals>-->
+<!--							<goal>start</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--					<execution>-->
+<!--						<id>post-integration-test</id>-->
+<!--						<goals>-->
+<!--							<goal>stop</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<release>${java.version}</release>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+				<executions>
+					<!-- Compile the unit test classes to the unit test output directory -->
+					<execution>
+						<id>default-testCompile</id>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+						<phase>test-compile</phase>
+						<configuration>
+							<outputDirectory>${basedir}/target/test-classes</outputDirectory>
+							<compileSourceRoots>
+								<sourceRoot>${basedir}/src/test/java</sourceRoot>
+							</compileSourceRoots>
+						</configuration>
+					</execution>
+					<!-- Compile the integration test classes to the integration test output 
+						directory -->
+					<execution>
+						<id>compile-integration-tests</id>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+						<phase>pre-integration-test</phase>
+						<configuration>
+							<outputDirectory>${basedir}/target/integration-test-classes</outputDirectory>
+							<compileSourceRoots>
+								<sourceRoot>${basedir}/src/integration-test/java</sourceRoot>
+							</compileSourceRoots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Add Unit and Test source package and resources folder to classpath -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-test-source</id>
+						<!-- This will help m2eclipse to recognize the folder as source folder 
+							after update project configuration. Based on comment updated. -->
+						<phase>validate</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/integration-test/java</source>
+								<source>src/integration-test/resources</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<!-- # Copy resources for the unit test resources files to the unit 
+						test output directory -->
+					<execution>
+						<id>default-testResources</id>
+						<goals>
+							<goal>testResources</goal>
+						</goals>
+						<phase>process-test-resources</phase>
+						<configuration>
+							<outputDirectory>${basedir}/target/test-classes</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/test/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<!-- # Copy resources for the integration test resources files to the 
+						integration test output directory -->
+					<execution>
+						<id>add-integration-test-resources</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>pre-integration-test</phase>
+						<configuration>
+							<outputDirectory>${basedir}/target/integration-test-classes</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/integration-test/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Code coverage report -->
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<testClassesDirectory>${basedir}/target/test-classes</testClassesDirectory>
+					<testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
+					<includes>
+						<include>**/*.class</include>
+					</includes>
+					<!-- <argLine>${jacoco.agent.ut.arg}</argLine> -->
+					<testFailureIgnore>false</testFailureIgnore>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+						<configuration>
+							<includes>
+								<include>**/*.class</include>
+							</includes>
+							<classesDirectory>${project.build.outputDirectory}</classesDirectory>
+							<testClassesDirectory>${basedir}/target/integration-test-classes</testClassesDirectory>
+							<testSourceDirectory>${basedir}/src/integration-test/java</testSourceDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>verify</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>verify</goal>
+						</goals>
+						<configuration>
+							<!-- <testFailureIgnore>false</testFailureIgnore> -->
+							<testFailureIgnore>true</testFailureIgnore>
+						</configuration>
+					</execution>
+					<!-- <execution> -->
+					<!-- <goals> -->
+					<!-- <goal>integration-test</goal> -->
+					<!-- <goal>verify</goal> -->
+					<!-- </goals> -->
+					<!-- </execution> -->
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.5</version>
+				<executions>
+					<execution>
+						<id>coverage-initialize</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>coverage-report</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

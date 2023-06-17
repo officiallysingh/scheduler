@@ -1,0 +1,64 @@
+
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overridden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+#
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+# set -Dspring.profiles.active=<dev|sit|int> as JVM argument to run in desired profile
+# If no profile is specified explicitly, application will fall back to default profile, which is "local"
+
+logging:
+    file:
+        path: logs
+        name: ${logging.file.path}/application.log
+        clean-history-on-start: true
+    level:
+        ROOT: info
+debug: false
+
+spring:
+    #profiles:
+        #include:
+            #- feature-1
+    datasource:
+        url: jdbc:sqlserver://localhost;databaseName=scheduler
+        username: sa
+        password: admin
+
+    jpa:
+        show-sql: false
+        properties:
+            '[hibernate.show_sql]': false
+            '[integration.envers.enabled]': false
+        hibernate:
+            ddl-auto: validate
+
+server:
+    port: 8081  
+                
+# ===================================================================
+# Application specific properties
+# Add your own application properties here
+# ===================================================================
+
+application:
+    pagination:
+        enabled: true
+    swagger:
+        enabled: false
+    external-config:
+        enabled: false
+    problem:
+        enabled: true
+        debug-info: true
+    security:
+        enabled: false
+        

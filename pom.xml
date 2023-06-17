@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.ksoot</groupId>
+	<artifactId>scheduler</artifactId>
+	 <version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>scheduler</name>
+	<description>Scheduler as a service parent project</description>
+
+	<properties>
+		<java.version>17</java.version>
+		<spring.boot.version>3.1.0</spring.boot.version>
+		<spring.cloud.version>2022.0.3</spring.cloud.version>
+		<spring.cloud.aws.version>2.3.0</spring.cloud.aws.version>
+		<aws.java.sdk.version>1.12.372</aws.java.sdk.version>
+		<jakarta.servlet.version>6.0.0</jakarta.servlet.version>
+		<jakarta-annotation-api.version>2.1.1</jakarta-annotation-api.version>
+		<hibernate.validator.version>8.0.0.Final</hibernate.validator.version>
+		<springdoc.openapi.version>2.1.0</springdoc.openapi.version>
+		<openapispec.validator.version>2.34.1</openapispec.validator.version>
+		<apache.commons.collections.version>4.4</apache.commons.collections.version>
+		<apache.httpclient.version>4.5.13</apache.httpclient.version>
+		<apache.commons.io.version>2.11.0</apache.commons.io.version>
+		<google.guava.version>31.1-jre</google.guava.version>
+		<projectreactor-blockhound.version>1.0.6.RELEASE</projectreactor-blockhound.version>
+		<lombok.version>1.18.26</lombok.version>
+		<junit.jupiter.version>5.9.1</junit.jupiter.version>
+
+<!--		<nexus.repository></nexus.repository>-->
+		<maven-release-plugin.version>3.0.1</maven-release-plugin.version>
+		<maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
+<!--		<scm.connection></scm.connection>-->
+		<compiler.source.version>${java.version}</compiler.source.version>
+		<compiler.target.version>${java.version}</compiler.target.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring.cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+
+			<dependency>
+				<groupId>jakarta.annotation</groupId>
+				<artifactId>jakarta.annotation-api</artifactId>
+				<version>${jakarta-annotation-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>${apache.commons.collections.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jakarta.annotation</groupId>
+				<artifactId>jakarta.annotation-api</artifactId>
+				<version>${jakarta-annotation-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${google.guava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.projectreactor.tools</groupId>
+				<artifactId>blockhound</artifactId>
+				<version>${projectreactor-blockhound.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+				<version>${springdoc.openapi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jakarta.servlet</groupId>
+				<artifactId>jakarta.servlet-api</artifactId>
+				<version>${jakarta.servlet.version}</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<modules>
+		<module>scheduler-commons</module>
+		<module>scheduler-client</module>
+		<module>scheduler-jobs</module>
+		<module>scheduler-service</module>
+	</modules>
+
+</project>

@@ -1,0 +1,98 @@
+
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overridden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+#
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+# set -Dspring.profiles.active=<dev|sit|int> as JVM argument to run in desired profile
+# If no profile is specified explicitly, application will fall back to default profile, which is "local"
+
+spring:
+    #profiles:
+        #active: local
+        #include:
+            #- feature-1
+    application:
+        name: scheduler-service    
+    datasource:
+        name: datasource
+        url: ${DB_NAME}
+        username: ${DB_USERNAME}
+        password: ${DB_PASSWORD}
+        hikari:
+            pool-name: scheduler-connection-pool
+            maximum-pool-size: 32
+            minimum-idle: 8
+
+    jpa:
+        database: POSTGRESQL
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        open-in-view: false
+        show-sql: false
+        properties:
+            '[hibernate.show_sql]': false
+            '[integration.envers.enabled]': false
+        hibernate:
+            ddl-auto: validate
+    quartz: 
+        job-store-type: jdbc   
+        auto-startup: false
+        overwrite-existing-jobs: false
+        scheduler-name: quartz-scheduler
+        #startup-delay: 
+        wait-for-jobs-to-complete-on-shutdown: true
+        jdbc.initialize-schema: never
+        # Defined properties as quartz.properties in application.external-config.properties.additional
+        # But you can override those proprties below
+        # properties: 
+            
+    flyway:
+        enabled: true
+        locations: 
+            - classpath:/db/migration
+    messages:
+        basename: i18n/messages,i18n/errors
+    task:
+        execution:
+            thread-name-prefix: scheduler-task-executor-
+            pool:
+                core-size: 8
+                max-size: 32
+                queue-capacity: 10000
+                keep-alive: "10s"    
+    jackson:
+        serialization:
+            write-dates-with-zone-id: true
+            write-dates-as-timestamps: false
+    #hateoas:
+        #use-hal-as-default-json-media-type: false
+
+server:
+    port: 8080
+    servlet:
+        context-path: /scheduler
+
+#logging:
+#    level:
+#        ROOT: DEBUG
+#debug: true
+
+# ===================================================================
+# Application specific properties
+# Add your own application properties here
+# ===================================================================
+problem:
+    enabled: true
+    debug-enabled: false
+    stacktrace-enabled: false
+    cause-chains-enabled: false
+
+        
