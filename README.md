@@ -20,4 +20,3 @@ The following guides illustrate how to use some features concretely:
 ### Introduction
 
 **Quartz based Scheduler as a service**
-
