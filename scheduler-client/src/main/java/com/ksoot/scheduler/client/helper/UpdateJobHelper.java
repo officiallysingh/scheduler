@@ -4,6 +4,5 @@ import com.ksoot.scheduler.common.domain.model.ScheduleJob;
 
 public interface UpdateJobHelper {
 
-	public ScheduleJob update();
-	
+  public ScheduleJob update();
 }

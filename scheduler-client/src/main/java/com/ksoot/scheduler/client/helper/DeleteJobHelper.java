@@ -4,6 +4,5 @@ import com.ksoot.scheduler.common.domain.model.Identity;
 
 public interface DeleteJobHelper {
 
-	public Identity delete();
-	
+  public Identity delete();
 }

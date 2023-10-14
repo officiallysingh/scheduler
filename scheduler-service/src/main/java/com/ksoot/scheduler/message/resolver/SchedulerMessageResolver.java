@@ -1,8 +1,8 @@
-//package com.ksoot.scheduler.message.resolver;
+// package com.ksoot.scheduler.message.resolver;
 //
-//import com.ksoot.common.message.MessageResolver;
+// import com.ksoot.common.message.MessageResolver;
 //
-//public enum SchedulerMessageResolver implements MessageResolver {
+// public enum SchedulerMessageResolver implements MessageResolver {
 //
 //	// @formatter:off
 //		JOB_ADDED("job.created.successfully",
@@ -42,4 +42,4 @@
 //		return this.defaultMessage;
 //	}
 //
-//}
+// }

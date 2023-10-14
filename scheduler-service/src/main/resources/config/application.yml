@@ -1,47 +1,39 @@
-
 # ===================================================================
 # Spring Boot configuration.
 #
 # This configuration will be overridden by the Spring profile you use,
 # for example application-dev.yml if you use the "dev" profile.
 #
-# ===================================================================
-
-# ===================================================================
-# Standard Spring Boot properties.
-# Full reference is available at:
+# Full reference for Standard Spring Boot properties is available at:
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 # set -Dspring.profiles.active=<dev|sit|int> as JVM argument to run in desired profile
 # If no profile is specified explicitly, application will fall back to default profile, which is "local"
 
 spring:
-    #profiles:
-        #active: local
-        #include:
-            #- feature-1
     application:
-        name: scheduler-service    
+        name: scheduler-service
+
+#------------------------- Database configuration -------------------------
     datasource:
-        name: datasource
-        url: ${DB_NAME}
-        username: ${DB_USERNAME}
-        password: ${DB_PASSWORD}
+        url: ${POSTGRES_URL}
+        username: ${POSTGRES_USERNAME}
+        password: ${POSTGRES_PASSWORD}
         hikari:
             pool-name: scheduler-connection-pool
             maximum-pool-size: 32
             minimum-idle: 8
-
     jpa:
-        database: POSTGRESQL
-        database-platform: org.hibernate.dialect.PostgreSQLDialect
-        open-in-view: false
+        hibernate:
+            ddl-auto: validate
         show-sql: false
         properties:
             '[hibernate.show_sql]': false
-            '[integration.envers.enabled]': false
-        hibernate:
-            ddl-auto: validate
+            '[hibernate.format_sql]': true
+            '[hibernate.use_sql_comments]': true
+            '[hibernate.jdbc.time_zone]': UTC
+            '[integration.envers.enabled]': true
+            '[hibernate.enable_lazy_load_no_trans]': true
     quartz: 
         job-store-type: jdbc   
         auto-startup: false
@@ -72,27 +64,67 @@ spring:
         serialization:
             write-dates-with-zone-id: true
             write-dates-as-timestamps: false
-    #hateoas:
-        #use-hal-as-default-json-media-type: false
+    mvc:
+        pathmatch:
+            matching-strategy: ant-path-matcher
+        problemdetails:
+            enabled: false
+        throw-exception-if-no-handler-found: true
+
+#------------------------- Swagger configuration -------------------------
+springdoc:
+    show-actuator: true
+    group-configs:
+        -
+            group: actuator
+            display-name: Actuator
+            paths-to-match: /actuator/**
+        -
+            group: scheduler
+            display-name: Scheduler
+#            paths-to-match: /**
+            paths-to-exclude: /actuator/**
+    swagger-ui:
+        syntaxHighlight:
+            activated: true
+#    swagger-ui:
+#        operationsSorter: method
+#        tagsSorter: alpha
+#------------------------- Actuators configuration -------------------------
+# If not specified '/actuator' is taken as default. If specified must start with '/'
+#management.endpoints.web.base-path=/
+# Set it as "*", if you want to expose all actuator endpoints
+management:
+    endpoint:
+        health:
+            enabled: true
+    endpoints:
+        web:
+            exposure:
+                include: info,health,metrics
+    metrics:
+        tags:
+            application: ${spring.application.name}
+
+problem:
+    #    type-url: http://localhost:8080/problems/help.html
+    debug-enabled: false
+    stacktrace-enabled: false
+    cause-chains-enabled: false
 
 server:
     port: 8080
+    forward-headers-strategy: framework
     servlet:
         context-path: /scheduler
-
-#logging:
-#    level:
-#        ROOT: DEBUG
-#debug: true
+logging:
+    level:
+        ROOT: DEBUG
+debug: false
 
 # ===================================================================
 # Application specific properties
 # Add your own application properties here
 # ===================================================================
-problem:
-    enabled: true
-    debug-enabled: false
-    stacktrace-enabled: false
-    cause-chains-enabled: false
 
         

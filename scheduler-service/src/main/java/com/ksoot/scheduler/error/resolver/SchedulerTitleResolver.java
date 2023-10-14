@@ -1,4 +1,4 @@
-///*
+/// *
 // * Copyright 2020 the original author or authors.
 // *
 // * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,14 +14,14 @@
 // * limitations under the License.
 // */
 //
-//package com.ksoot.scheduler.error.resolver;
+// package com.ksoot.scheduler.error.resolver;
 //
-//import com.ksoot.common.message.MessageResolver;
+// import com.ksoot.common.message.MessageResolver;
 //
-///**
+/// **
 // * @author Rajveer Singh
 // */
-//public enum SchedulerTitleResolver implements MessageResolver {
+// public enum SchedulerTitleResolver implements MessageResolver {
 //
 //	// @formatter:off
 //	SCHEDULER_EXCEPTION(TITLE_MESSAGE_CODE_PREFIX + ".scheduler.exception",
@@ -47,4 +47,4 @@
 //		return this.defaultMessage;
 //	}
 //
-//}
+// }

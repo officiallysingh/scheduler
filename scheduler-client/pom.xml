@@ -13,10 +13,36 @@
 	<!-- <version>0.0.1-SNAPSHOT</version> -->
 	<packaging>jar</packaging>
 	<name>scheduler-client</name>
-	<description>Scheduler client to be used by other consumer services</description>
+	<description>Scheduler client to be used by consumer services to avail Scheduler services</description>
+	<url>https://github.com/officiallysingh/scheduler</url>
+
+	<organization>
+		<name>Ksoot Technologies</name>
+	</organization>
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Rajveer Sing</name>
+			<email>raj14.1984@gmail.com</email>
+			<organization>Ksoot Technologies</organization>
+			<organizationUrl>http://www.ksoot.com</organizationUrl>
+		</developer>
+	</developers>
 
 	<properties>
-		<ksoot-commons-dependencies.version>0.0.1-SNAPSHOT</ksoot-commons-dependencies.version>
+		<scm.connection>scm:git:git@github.com:officiallysingh/scheduler.git</scm.connection>
+		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+		<maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
+		<maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -28,12 +54,6 @@
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
-			<!-- <optional>true</optional> -->
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webflux</artifactId>
-<!-- 			<version>5.3.9</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -41,51 +61,109 @@
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<!-- Auto format code during compilation -->
+			<plugin>
+				<groupId>com.spotify.fmt</groupId>
+				<artifactId>fmt-maven-plugin</artifactId>
+				<version>${fmt-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Apply checkstyle -->
+			<!--			<plugin>-->
+			<!--				<groupId>org.apache.maven.plugins</groupId>-->
+			<!--				<artifactId>maven-checkstyle-plugin</artifactId>-->
+			<!--				<version>${maven-checkstyle-plugin.version}</version>-->
+			<!--				<configuration>-->
+			<!--					<configLocation>${project.basedir}/tooling/checkstyle.xml</configLocation>-->
+			<!--					<suppressionsLocation>-->
+			<!--						${project.basedir}/tooling/checkstyle-suppressions.xml</suppressionsLocation>-->
+			<!--					<excludes>**/package-info.java</excludes>-->
+			<!--					<includeTestSourceDirectory>true</includeTestSourceDirectory>-->
+			<!--					<skip>true</skip>-->
+			<!--				</configuration>-->
+			<!--				<executions>-->
+			<!--					<execution>-->
+			<!--						<goals>-->
+			<!--							<goal>check</goal>-->
+			<!--						</goals>-->
+			<!--					</execution>-->
+			<!--				</executions>-->
+			<!--			</plugin>-->
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>${maven-release-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>${maven-deploy-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
-					<release>${java.version}</release>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-							<version>${lombok.version}</version>
-						</path>
-					</annotationProcessorPaths>
+					<source>${maven.compiler.source}</source>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.5</version>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>${maven-gpg-plugin.version}</version>
 				<executions>
 					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
 						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
+							<goal>sign</goal>
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>${nexus-staging-maven-plugin.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

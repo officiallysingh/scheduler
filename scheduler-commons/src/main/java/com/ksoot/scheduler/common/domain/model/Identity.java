@@ -17,44 +17,40 @@
 package com.ksoot.scheduler.common.domain.model;
 
 import jakarta.validation.constraints.NotEmpty;
-import org.quartz.JobKey;
-import org.quartz.TriggerKey;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.quartz.JobKey;
+import org.quartz.TriggerKey;
 
 /**
  * @author Rajveer Singh
  */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-//@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor(staticName = "of", onConstructor_ = { @JsonCreator })
+// @AllArgsConstructor(access = AccessLevel.PRIVATE)
+// @AllArgsConstructor(
+//    staticName = "of",
+//    onConstructor_ = {@JsonCreator})
 @EqualsAndHashCode
 public class Identity {
 
-	@NotEmpty
-	private String group;
+  @NotEmpty private String group;
 
-	@NotEmpty
-	private String name;
+  @NotEmpty private String name;
 
-//	@JsonCreator
-//    public static Identity of(@JsonProperty("group") final String group,
-//    		@JsonProperty("name") final String name) {
-//    	return new Identity(group, name);
-//    }
-	
-	public JobKey jobKey() {
-		return JobKey.jobKey(this.name, this.group);
-	}
+  //	@JsonCreator
+  //    public static Identity of(@JsonProperty("group") final String group,
+  //    		@JsonProperty("name") final String name) {
+  //    	return new Identity(group, name);
+  //    }
 
-	public TriggerKey triggerKey() {
-		return TriggerKey.triggerKey(this.name, this.group);
-	}
+  public JobKey jobKey() {
+    return JobKey.jobKey(this.name, this.group);
+  }
+
+  public TriggerKey triggerKey() {
+    return TriggerKey.triggerKey(this.name, this.group);
+  }
 }

@@ -2,33 +2,62 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.ksoot</groupId>
-		<artifactId>scheduler</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.1.4</version>
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	 <groupId>com.ksoot.scheduler</groupId>
+
+	<groupId>com.ksoot.scheduler</groupId>
 	<artifactId>scheduler-service</artifactId>
-	<!-- <version>0.0.1-SNAPSHOT</version> -->
+	 <version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>scheduler-service</name>
 	<description>Spring Boot Quartz Scheduler as a service</description>
 
 	<properties>
-		<start-class>com.ksoot.scheduler.SchedulerApplication</start-class>
+		<spring-cloud.version>2022.0.4</spring-cloud.version>
+		<springdoc-openapi.version>2.1.0</springdoc-openapi.version>
+		<commons-collections4.version>4.4</commons-collections4.version>
+		<guava.version>32.1.2-jre</guava.version>
+		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+		<hibernate-jpamodelgen.version>6.2.7.FINAL</hibernate-jpamodelgen.version>
+		<snakeyaml.version>2.0</snakeyaml.version>
+		<spring-boot-commons.version>0.0.1-SNAPSHOT</spring-boot-commons.version>
+		<spring-boot-problem-handler.version>1.4</spring-boot-problem-handler.version>
+
+		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+		<maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
+		<maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
+
+		<fmt-maven-plugin.version>2.21.1</fmt-maven-plugin.version>
+		<maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
+		<error_prone_core.version>2.4.0</error_prone_core.version>
+		<jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
+
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.ksoot.scheduler</groupId>
-			<artifactId>scheduler-commons</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ksoot.scheduler</groupId>
-			<artifactId>scheduler-jobs</artifactId>
-			<version>${project.version}</version>
-		</dependency>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
+	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -47,12 +76,20 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc-openapi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -65,10 +102,6 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
@@ -78,23 +111,27 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok-mapstruct-binding</artifactId>
+			<version>${lombok-mapstruct-binding.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -109,25 +146,42 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.junit.vintage</groupId>
-			<artifactId>junit-vintage-engine</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.hamcrest</groupId>
-					<artifactId>hamcrest-core</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>com.ksoot.scheduler</groupId>
+			<artifactId>scheduler-commons</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<scope>test</scope>
+			<groupId>com.ksoot.scheduler</groupId>
+			<artifactId>scheduler-jobs</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.officiallysingh</groupId>
+			<artifactId>spring-boot-commons</artifactId>
+			<version>${spring-boot-commons.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.officiallysingh</groupId>
+			<artifactId>spring-boot-problem-handler</artifactId>
+			<version>${spring-boot-problem-handler.version}</version>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<!-- Auto format code during compilation -->
+			<plugin>
+				<groupId>com.spotify.fmt</groupId>
+				<artifactId>fmt-maven-plugin</artifactId>
+				<version>${fmt-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -140,35 +194,6 @@
 					</execution>
 				</executions>
 			</plugin>
-<!--			<plugin>-->
-<!--				<groupId>org.springframework.boot</groupId>-->
-<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--				<configuration>-->
-<!--					<mainClass>${start-class}</mainClass>-->
-<!--					<executable>${spring-boot-jar.executable}</executable>-->
-<!--					<jvmArguments>${argLine}</jvmArguments>-->
-<!--					&lt;!&ndash; <jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments> &ndash;&gt;-->
-<!--				</configuration>-->
-<!--				<executions>-->
-<!--					&lt;!&ndash; <execution> &ndash;&gt;-->
-<!--					&lt;!&ndash; <goals> &ndash;&gt;-->
-<!--					&lt;!&ndash; <goal>repackage</goal> &ndash;&gt;-->
-<!--					&lt;!&ndash; </goals> &ndash;&gt;-->
-<!--					&lt;!&ndash; </execution> &ndash;&gt;-->
-<!--					<execution>-->
-<!--						<id>pre-integration-test</id>-->
-<!--						<goals>-->
-<!--							<goal>start</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--					<execution>-->
-<!--						<id>post-integration-test</id>-->
-<!--						<goals>-->
-<!--							<goal>stop</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -176,9 +201,29 @@
 					<release>${java.version}</release>
 					<annotationProcessorPaths>
 						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct.version}</version>
+						</path>
+						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 							<version>${lombok.version}</version>
+						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>${lombok-mapstruct-binding.version}</version>
+						</path>
+						<path>
+							<groupId>com.google.errorprone</groupId>
+							<artifactId>error_prone_core</artifactId>
+							<version>${error_prone_core.version}</version>
+						</path>
+						<path>
+							<groupId>org.hibernate.orm</groupId>
+							<artifactId>hibernate-jpamodelgen</artifactId>
+							<version>${hibernate-jpamodelgen.version}</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
@@ -332,7 +377,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.5</version>
+				<version>${jacoco-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>coverage-initialize</id>

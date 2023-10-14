@@ -17,7 +17,6 @@
 package com.ksoot.scheduler;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
@@ -31,11 +30,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // @EnableRetry
 public class SchedulerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SchedulerApplication.class, args);
-//		SpringApplication application = new SpringApplication(SchedulerApplication.class);
-//		application.setWebApplicationType(WebApplicationType.REACTIVE);
-//		BootHelper.boot(application, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(SchedulerApplication.class, args);
+    //		SpringApplication application = new SpringApplication(SchedulerApplication.class);
+    //		application.setWebApplicationType(WebApplicationType.REACTIVE);
+    //		BootHelper.boot(application, args);
+  }
 }

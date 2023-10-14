@@ -16,9 +16,11 @@
 
 package com.ksoot.scheduler.adapter.rest;
 
-import static com.ksoot.scheduler.SchedulerConstant.SCHEDULER_API;
-
+import com.ksoot.scheduler.common.domain.model.Identity;
+import com.ksoot.scheduler.common.domain.model.JobDescriptor;
+import com.ksoot.scheduler.common.domain.model.TriggerDescriptor;
 import com.ksoot.scheduler.domain.service.SchedulerService;
+import lombok.RequiredArgsConstructor;
 import org.quartz.JobKey;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
@@ -27,79 +29,58 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ksoot.scheduler.common.domain.model.Identity;
-import com.ksoot.scheduler.common.domain.model.JobDescriptor;
-import com.ksoot.scheduler.common.domain.model.TriggerDescriptor;
-
-import lombok.RequiredArgsConstructor;
-
 /**
  * @author Rajveer Singh
  */
-//@Api(value = "Scheduler Management",
+// @Api(value = "Scheduler Management",
 //		description = "<b>Scheduler Management</b> API for scheduling jobs and managing thereafter ",
 //		tags = "Scheduler")
-@RestController(SCHEDULER_API)
+@RestController("/v1")
 @RequiredArgsConstructor
 public class SchedulerController {
-	
-	private final SchedulerService schedulerService;
-	
-	@InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.initDirectFieldAccess();
-    }
 
-	@GetMapping("/jobs")
-	public ResponseEntity<JobDescriptor> getJob(final JobKey jobKey) {
-		this.schedulerService.getJobDetail(jobKey);
-		return null;
-	}
-	
-	@DeleteMapping("/jobs")
-	public ResponseEntity<Void> deleteJob(final Identity identity) {
-		this.schedulerService.getJobDetail(identity.jobKey());
-		return null;
-	}
-	
-	@GetMapping("/triggers")
-	public ResponseEntity<TriggerDescriptor> getTrigger(final Identity identity) {
-		this.schedulerService.getTrigger(identity.triggerKey());
-		return null;
-	}
+  private final SchedulerService schedulerService;
 
-	@DeleteMapping("/triggers")
-	public ResponseEntity<Void> deleteTrigger(final Identity identity) {
-		this.schedulerService.getTrigger(identity.triggerKey());
-		return null;
-	}
+  @InitBinder
+  public void initBinder(WebDataBinder binder) {
+    binder.initDirectFieldAccess();
+  }
 
-	public void createSchedule() {
+  @GetMapping("/jobs")
+  public ResponseEntity<JobDescriptor> getJob(final JobKey jobKey) {
+    this.schedulerService.getJobDetail(jobKey);
+    return null;
+  }
 
-	}
+  @DeleteMapping("/jobs")
+  public ResponseEntity<Void> deleteJob(final Identity identity) {
+    this.schedulerService.getJobDetail(identity.jobKey());
+    return null;
+  }
 
-	public void createTrigger() {
+  @GetMapping("/triggers")
+  public ResponseEntity<TriggerDescriptor> getTrigger(final Identity identity) {
+    this.schedulerService.getTrigger(identity.triggerKey());
+    return null;
+  }
 
-	}
+  @DeleteMapping("/triggers")
+  public ResponseEntity<Void> deleteTrigger(final Identity identity) {
+    this.schedulerService.getTrigger(identity.triggerKey());
+    return null;
+  }
 
-	public void deleteTrigger() {
+  public void createSchedule() {}
 
-	}
+  public void createTrigger() {}
 
-	public void createJob() {
+  public void deleteTrigger() {}
 
-	}
+  public void createJob() {}
 
-	public void scheduleJob() {
+  public void scheduleJob() {}
 
-	}
+  public void reScheduleJob() {}
 
-	public void reScheduleJob() {
-
-	}
-
-	public void deleteJob() {
-
-	}
-
+  public void deleteJob() {}
 }

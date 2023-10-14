@@ -15,9 +15,8 @@
  */
 
 package com.ksoot.scheduler.domain.model;
+
 /**
  * @author Rajveer Singh
  */
-public class JobExecution {
-
-}
+public class JobExecution {}

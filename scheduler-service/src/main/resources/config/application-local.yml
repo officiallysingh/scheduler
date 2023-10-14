@@ -36,8 +36,15 @@ spring:
         locations: 
             - classpath:/db/migration
 
+problem:
+    debug-enabled: false
+    stacktrace-enabled: false
+    cause-chains-enabled: false
+
 server:
     port: 8080
+    servlet:
+        context-path: /scheduler
 
 logging:
     file:
@@ -46,24 +53,11 @@ logging:
         clean-history-on-start: true
     level:
         ROOT: info
+#        '[org.hibernate]': DEBUG
 debug: false
 
 # ===================================================================
 # Application specific properties
 # Add your own application properties here
 # ===================================================================
-
-application:
-    pagination:
-        enabled: true
-    swagger:
-        enabled: true
-    problem:
-        enabled: true
-        debug-info: true
-    security:
-        enabled: false
-        unsecured-uris:
-            - /actuator/**
-            #- /external/**
         

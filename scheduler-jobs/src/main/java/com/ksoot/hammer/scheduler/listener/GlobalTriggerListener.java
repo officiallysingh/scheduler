@@ -4,11 +4,10 @@ import org.quartz.listeners.TriggerListenerSupport;
 
 public class GlobalTriggerListener extends TriggerListenerSupport {
 
-	private static final String GLOBAL_TRIGGER_LISTENER_NAME = "GLOBAL_TRIGGER_LISTENER";
+  private static final String GLOBAL_TRIGGER_LISTENER_NAME = "GLOBAL_TRIGGER_LISTENER";
 
-	@Override
-	public String getName() {
-		return GLOBAL_TRIGGER_LISTENER_NAME;
-	}
-
+  @Override
+  public String getName() {
+    return GLOBAL_TRIGGER_LISTENER_NAME;
+  }
 }

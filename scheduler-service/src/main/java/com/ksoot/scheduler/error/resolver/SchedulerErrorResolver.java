@@ -1,17 +1,17 @@
-//package com.ksoot.scheduler.error.resolver;
+// package com.ksoot.scheduler.error.resolver;
 //
-//import org.quartz.SchedulerException;
-//import org.zalando.problem.Status;
-//import org.zalando.problem.StatusType;
+// import org.quartz.SchedulerException;
+// import org.zalando.problem.Status;
+// import org.zalando.problem.StatusType;
 //
-//import com.ksoot.common.error.ApplicationProblem;
-//import com.ksoot.common.error.resolver.ErrorResolver;
-//import com.ksoot.common.error.resolver.GeneralTitleMessageResolver;
-//import com.ksoot.common.message.MessageProvider;
-//import com.ksoot.common.message.MessageResolver;
-//import com.ksoot.scheduler.common.SchedulerConstant;
+// import com.ksoot.common.error.ApplicationProblem;
+// import com.ksoot.common.error.resolver.ErrorResolver;
+// import com.ksoot.common.error.resolver.GeneralTitleMessageResolver;
+// import com.ksoot.common.message.MessageProvider;
+// import com.ksoot.common.message.MessageResolver;
+// import com.ksoot.scheduler.common.SchedulerConstant;
 //
-//public enum SchedulerErrorResolver implements ErrorResolver {
+// public enum SchedulerErrorResolver implements ErrorResolver {
 //
 //	// @formatter:off
 //	SCHEDULER_EXCEPTION(SchedulerErrorMessageResolver.SCHEDULER_EXCEPTION,
@@ -84,8 +84,9 @@
 //
 //	// ------------ Problem factory methods -------------------
 //
-//	public static ApplicationProblem schedulerProblem(final SchedulerException e) throws ApplicationProblem {
+//	public static ApplicationProblem schedulerProblem(final SchedulerException e) throws
+// ApplicationProblem {
 //		return new ApplicationProblem(SchedulerErrorResolver.SCHEDULER_EXCEPTION, e);
 //	}
 //
-//}
+// }

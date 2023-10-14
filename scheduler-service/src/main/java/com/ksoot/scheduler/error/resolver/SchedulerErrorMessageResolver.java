@@ -1,8 +1,8 @@
-//package com.ksoot.scheduler.error.resolver;
+// package com.ksoot.scheduler.error.resolver;
 //
-//import com.ksoot.common.message.MessageResolver;
+// import com.ksoot.common.message.MessageResolver;
 //
-//public enum SchedulerErrorMessageResolver implements MessageResolver {
+// public enum SchedulerErrorMessageResolver implements MessageResolver {
 //
 //	// @formatter:off
 //	SCHEDULER_EXCEPTION(ERROR_MESSAGE_CODE_PREFIX + ".scheduler.exception",
@@ -28,4 +28,4 @@
 //		return this.defaultMessage;
 //	}
 //
-//}
+// }
