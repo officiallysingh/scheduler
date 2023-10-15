@@ -37,15 +37,6 @@
 
 	<properties>
 		<core-commons.version>0.0.1-SNAPSHOT</core-commons.version>
-
-		<scm.connection>scm:git:git@github.com:officiallysingh/scheduler.git</scm.connection>
-
-		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
-		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
-		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-		<maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
-		<maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
 	</properties>
 
 	<dependencies>

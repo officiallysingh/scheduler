@@ -24,6 +24,7 @@
 		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 		<hibernate-jpamodelgen.version>6.2.7.FINAL</hibernate-jpamodelgen.version>
 		<snakeyaml.version>2.0</snakeyaml.version>
+
 		<spring-boot-commons.version>0.0.1-SNAPSHOT</spring-boot-commons.version>
 		<spring-boot-problem-handler.version>1.4</spring-boot-problem-handler.version>
 
