@@ -2,6 +2,7 @@ package com.ksoot.scheduler.jobs;
 
 import com.ksoot.common.util.DateTimeUtils;
 import java.time.ZonedDateTime;
+import lombok.NoArgsConstructor;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -9,11 +10,16 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 
 // @Component
 // @ExecuteInJTATransaction
-public class RestCallJob extends QuartzJobBean {
+@NoArgsConstructor
+public class ServiceCallJob extends QuartzJobBean {
 
-  private String targetServiceUrl;
-
-  //	private HttpMethod httpMethod;
+  // Don't add any instance variable it does not make sense to have state data-fields defined on the
+  // job class -
+  // as their values would not be preserved between job executions.
+  // You may now be wanting to ask “how can I provide properties/configuration for a Job instance?”
+  // and “how can I keep track of a job’s state between executions?”
+  // The answer to these questions are the same: the key is the JobDataMap, which is part of the
+  // JobDetail object.
 
   @Override
   protected void executeInternal(final JobExecutionContext jobExecutionContext)

@@ -1,8 +1,8 @@
 package com.ksoot.scheduler.client.helper;
 
-import com.ksoot.scheduler.common.domain.model.ScheduleJob;
+import com.ksoot.scheduler.common.domain.model.ScheduleJobRQ;
 
 public interface UpdateJobHelper {
 
-  public ScheduleJob update();
+  public ScheduleJobRQ update();
 }

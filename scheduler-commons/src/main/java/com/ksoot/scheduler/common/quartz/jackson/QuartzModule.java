@@ -15,9 +15,17 @@ public class QuartzModule extends Module {
   public QuartzModule() {
     super();
     serializers.addSerializer(Trigger.class, new TriggerSerializer());
-    serializers.addSerializer(JobDetail.class, new JobDetailSerializer());
     deserializers.addDeserializer(Trigger.class, new TriggerDeserializer());
+
+    serializers.addSerializer(JobDetail.class, new JobDetailSerializer());
     deserializers.addDeserializer(JobDetail.class, new JobDetailDeserializer());
+
+    //    serializers.addSerializer(HttpMethod.class, new HttpMethodSerializer());
+    //    deserializers.addDeserializer(HttpMethod.class, new HttpMethodDeserializer());
+
+    //    serializers.addSerializer(HttpStatus.class, new HttpStatusSerializer());
+    //    deserializers.addDeserializer(HttpStatus.class, new HttpStatusDeserializer());
+
   }
 
   @Override

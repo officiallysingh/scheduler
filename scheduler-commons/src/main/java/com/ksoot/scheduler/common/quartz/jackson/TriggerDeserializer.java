@@ -15,7 +15,7 @@ class TriggerDeserializer extends JsonDeserializer<Trigger> {
    * com.fasterxml.jackson.databind.DeserializationContext)
    */
   @Override
-  public Trigger deserialize(final JsonParser parser, final DeserializationContext ctxt)
+  public Trigger deserialize(final JsonParser parser, final DeserializationContext context)
       throws IOException {
     return SerializationUtils.deserialize(parser.getBinaryValue());
   }

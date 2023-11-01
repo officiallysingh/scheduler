@@ -19,7 +19,7 @@ class JobDetailSerializer extends JsonSerializer<JobDetail> {
    */
   @Override
   public void serialize(
-      final JobDetail jobDetail, final JsonGenerator gen, final SerializerProvider serializers)
+      final JobDetail jobDetail, final JsonGenerator gen, final SerializerProvider provider)
       throws IOException {
     gen.writeBinary(SerializationUtils.serialize(jobDetail));
   }
