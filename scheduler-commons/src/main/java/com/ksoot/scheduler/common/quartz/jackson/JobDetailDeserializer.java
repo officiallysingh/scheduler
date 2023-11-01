@@ -15,7 +15,7 @@ class JobDetailDeserializer extends JsonDeserializer<JobDetail> {
    * com.fasterxml.jackson.databind.DeserializationContext)
    */
   @Override
-  public JobDetail deserialize(final JsonParser parser, final DeserializationContext ctxt)
+  public JobDetail deserialize(final JsonParser parser, final DeserializationContext context)
       throws IOException {
     return SerializationUtils.deserialize(parser.getBinaryValue());
   }

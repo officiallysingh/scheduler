@@ -16,6 +16,7 @@ spring:
 
 #------------------------- Database configuration -------------------------
     datasource:
+        name: datasource # Don't change it, it's referred in quartz.properties
         url: ${POSTGRES_URL}
         username: ${POSTGRES_USERNAME}
         password: ${POSTGRES_PASSWORD}

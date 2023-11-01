@@ -16,35 +16,18 @@
 
 package com.ksoot.scheduler.common.domain.model;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
 import org.quartz.JobKey;
 import org.quartz.TriggerKey;
 
 /**
  * @author Rajveer Singh
  */
-@Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-// @AllArgsConstructor(access = AccessLevel.PRIVATE)
-// @AllArgsConstructor(
-//    staticName = "of",
-//    onConstructor_ = {@JsonCreator})
-@EqualsAndHashCode
-public class Identity {
-
-  @NotEmpty private String group;
-
-  @NotEmpty private String name;
-
-  //	@JsonCreator
-  //    public static Identity of(@JsonProperty("group") final String group,
-  //    		@JsonProperty("name") final String name) {
-  //    	return new Identity(group, name);
-  //    }
+@Builder
+@Valid
+public record Identity(@NotEmpty String group, @NotEmpty String name) {
 
   public JobKey jobKey() {
     return JobKey.jobKey(this.name, this.group);

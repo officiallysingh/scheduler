@@ -40,7 +40,8 @@ public class SchedulerConfiguration {
       final SpringBeanJobFactory jobFactory,
       final DataSource dataSource,
       @Qualifier(APPLICATION_TASK_EXECUTOR_BEAN_NAME) Executor taskExecutor,
-      final QuartzProperties quartzProperties) {
+      final QuartzProperties quartzProperties)
+      throws IOException {
     log.info("Starting to initialize SchedulerFactoryBean ...");
     //        AutoWiringSpringBeanJobFactory jobFactory = new AutoWiringSpringBeanJobFactory();
     //        jobFactory.setApplicationContext(applicationContext);
@@ -66,8 +67,11 @@ public class SchedulerConfiguration {
       } else {
         log.warn("Quartz property file: " + QUARTZ_PROPERTIES + " does not exist");
       }
-    } catch (IOException e) {
+    } catch (final IOException e) {
       log.error("Exception while reading default properties Quartz file: " + QUARTZ_PROPERTIES, e);
+      //      throw new UncheckedIOException("Exception while reading default properties Quartz
+      // file: " + QUARTZ_PROPERTIES, e);
+      throw e;
     }
 
     quartzProps.putAll(quartzProperties.getProperties());

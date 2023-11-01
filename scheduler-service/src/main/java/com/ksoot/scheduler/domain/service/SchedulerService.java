@@ -19,7 +19,7 @@ public interface SchedulerService {
    *     SCHEDULER_EXCEPTION</code> if there is an internal Scheduler error
    * @see Scheduler#checkExists(JobKey jobKey)
    */
-  Boolean doesJobExist(final JobKey jobKey);
+  Boolean jobExists(final JobKey jobKey);
 
   /**
    * Get all <code>JobDetail</code>s matching given <code>JobKey</code> <code>GroupMatcher</code>
@@ -209,7 +209,7 @@ public interface SchedulerService {
    *     SCHEDULER_EXCEPTION</code> If there is an internal Scheduler error.
    * @see Scheduler#checkExists(TriggerKey triggerKey)
    */
-  Boolean doesTriggerExist(final TriggerKey triggerKey);
+  Boolean triggerExists(final TriggerKey triggerKey);
 
   /**
    * Though there is no direct way to update a <code>Trigger</code>. Effectively the update <code>

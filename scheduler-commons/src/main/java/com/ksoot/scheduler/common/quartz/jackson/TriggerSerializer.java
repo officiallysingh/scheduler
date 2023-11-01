@@ -19,7 +19,7 @@ class TriggerSerializer extends JsonSerializer<Trigger> {
    */
   @Override
   public void serialize(
-      final Trigger trigger, final JsonGenerator gen, final SerializerProvider serializers)
+      final Trigger trigger, final JsonGenerator gen, final SerializerProvider provider)
       throws IOException {
     gen.writeBinary(SerializationUtils.serialize(trigger));
   }

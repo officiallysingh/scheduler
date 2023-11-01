@@ -18,6 +18,7 @@
         <swagger-annotations-jakarta.version>2.2.10</swagger-annotations-jakarta.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <guava.version>32.1.2-jre</guava.version>
+        <okhttp.version>2.7.5</okhttp.version>
         <spring-boot-problem-handler.version>1.4</spring-boot-problem-handler.version>
 
         <scm.connection>scm:git:git@github.com:officiallysingh/scheduler.git</scm.connection>
@@ -75,6 +76,11 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
             </dependency>
 
             <dependency>
