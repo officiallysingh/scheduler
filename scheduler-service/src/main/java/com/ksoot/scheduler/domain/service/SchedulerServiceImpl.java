@@ -31,7 +31,7 @@ public class SchedulerServiceImpl implements SchedulerService {
    * JobKey)
    */
   @Override
-  public Boolean doesJobExist(final JobKey jobKey) {
+  public Boolean jobExists(final JobKey jobKey) {
     try {
       return this.scheduler.checkExists(jobKey);
     } catch (final SchedulerException e) {
@@ -279,7 +279,7 @@ public class SchedulerServiceImpl implements SchedulerService {
    * quartz.TriggerKey)
    */
   @Override
-  public Boolean doesTriggerExist(final TriggerKey triggerKey) {
+  public Boolean triggerExists(final TriggerKey triggerKey) {
     try {
       return this.scheduler.checkExists(triggerKey);
     } catch (final SchedulerException e) {
@@ -373,7 +373,7 @@ public class SchedulerServiceImpl implements SchedulerService {
    * @see com.ksoot.scheduler.domain.service.SchedulerService#getAllTriggers(org.quartz.impl.matchers.GroupMatcher)
    */
   @Override
-  public List<Trigger> getAllTriggers(GroupMatcher<TriggerKey> triggerKeyMatcher) {
+  public List<Trigger> getAllTriggers(final GroupMatcher<TriggerKey> triggerKeyMatcher) {
     try {
       return this.scheduler.getTriggerKeys(triggerKeyMatcher).stream()
           .map(this::getTrigger)

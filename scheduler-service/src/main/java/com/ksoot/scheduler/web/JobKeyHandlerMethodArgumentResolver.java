@@ -21,8 +21,7 @@ public class JobKeyHandlerMethodArgumentResolver extends KeyHandlerMethodArgumen
       MethodParameter parameter,
       ModelAndViewContainer mavContainer,
       NativeWebRequest webRequest,
-      WebDataBinderFactory binderFactory)
-      throws Exception {
+      WebDataBinderFactory binderFactory) {
     Map<String, String[]> queryParams = webRequest.getParameterMap();
     return JobKey.jobKey(super.getName(queryParams), super.getGroup(queryParams));
   }

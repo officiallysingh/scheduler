@@ -17,11 +17,12 @@
 package com.ksoot.scheduler.adapter.rest;
 
 import com.ksoot.scheduler.common.domain.model.Identity;
-import com.ksoot.scheduler.common.domain.model.JobDescriptor;
-import com.ksoot.scheduler.common.domain.model.TriggerDescriptor;
+import com.ksoot.scheduler.common.domain.model.ScheduleJobRQ;
 import com.ksoot.scheduler.domain.service.SchedulerService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ArrayUtils;
 import org.quartz.JobKey;
+import org.quartz.Trigger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,15 +30,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 /**
  * @author Rajveer Singh
  */
-// @Api(value = "Scheduler Management",
-//		description = "<b>Scheduler Management</b> API for scheduling jobs and managing thereafter ",
-//		tags = "Scheduler")
 @RestController("/v1")
 @RequiredArgsConstructor
-public class SchedulerController {
+public class SchedulerController implements SchedulerApi {
 
   private final SchedulerService schedulerService;
 
@@ -46,11 +46,11 @@ public class SchedulerController {
     binder.initDirectFieldAccess();
   }
 
-  @GetMapping("/jobs")
-  public ResponseEntity<JobDescriptor> getJob(final JobKey jobKey) {
-    this.schedulerService.getJobDetail(jobKey);
-    return null;
-  }
+//  @GetMapping("/jobs")
+//  public ResponseEntity<JobDescriptor> getJob(final JobKey jobKey) {
+//    this.schedulerService.getJobDetail(jobKey);
+//    return null;
+//  }
 
   @DeleteMapping("/jobs")
   public ResponseEntity<Void> deleteJob(final Identity identity) {
@@ -58,11 +58,11 @@ public class SchedulerController {
     return null;
   }
 
-  @GetMapping("/triggers")
-  public ResponseEntity<TriggerDescriptor> getTrigger(final Identity identity) {
-    this.schedulerService.getTrigger(identity.triggerKey());
-    return null;
-  }
+//  @GetMapping("/triggers")
+//  public ResponseEntity<TriggerDescriptor> getTrigger(final Identity identity) {
+//    this.schedulerService.getTrigger(identity.triggerKey());
+//    return null;
+//  }
 
   @DeleteMapping("/triggers")
   public ResponseEntity<Void> deleteTrigger(final Identity identity) {
@@ -78,9 +78,21 @@ public class SchedulerController {
 
   public void createJob() {}
 
-  public void scheduleJob() {}
+  public void scheduleJob(final ScheduleJobRQ scheduleJobRQ) {
+    if(ArrayUtils.isNotEmpty(scheduleJobRQ.triggers())) {
+      this.schedulerService.scheduleJob(scheduleJobRQ.jobDetail(), scheduleJobRQ.triggers()[0]);
+    } else {
+      this.schedulerService.scheduleJob(scheduleJobRQ.jobDetail(), true, scheduleJobRQ.triggers());
+    }
+  }
 
-  public void reScheduleJob() {}
+  public void reScheduleJob(final Identity oldTriggerKey, final Trigger newTrigger) {
+    if(Objects.nonNull(oldTriggerKey)) {
+      this.schedulerService.reScheduleJob(oldTriggerKey.triggerKey(), newTrigger);
+    } else {
+      this.schedulerService.reScheduleJob(newTrigger);
+    }
+  }
 
   public void deleteJob() {}
 }
